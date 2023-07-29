@@ -20,9 +20,15 @@ while True:
     #this below check position of hand
     #print(results.multi_hand_landmarks)
     if results.multi_hand_landmarks:
-        for handLns in results.multi_hand_landmarks:
-            mpdraw.draw_landmarks(frame,handLns,mpHands.HAND_CONNECTIONS)
-
+        for handLms in results.multi_hand_landmarks:
+            mpdraw.draw_landmarks(frame,handLms,mpHands.HAND_CONNECTIONS)
+            if id,lm in enumerate(handlms.landmark):
+                # print(id,lm)
+                h,w,c = frame.shape
+                cx,cy = int(lm.x*w),int(lm.y*h)
+                print(id,cx,cy)
+                # if id == 0:
+                #     cv.circle(frame,(cx,cy),15,(255,0,255),cv.FILLED)
     cTime = time.time()
     fps = 1/(cTime-pTime)
     pTime = cTime
